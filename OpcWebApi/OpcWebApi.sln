@@ -5,6 +5,8 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpcWebApi", "OpcWebApi\OpcWebApi.csproj", "{05B77793-FDED-4A1A-897F-285A3387D9B6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpcConApp", "OpcConApp\OpcConApp.csproj", "{BCA26B3B-EB33-4F0E-9649-7BC76DCCEFB9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{05B77793-FDED-4A1A-897F-285A3387D9B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05B77793-FDED-4A1A-897F-285A3387D9B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05B77793-FDED-4A1A-897F-285A3387D9B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCA26B3B-EB33-4F0E-9649-7BC76DCCEFB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCA26B3B-EB33-4F0E-9649-7BC76DCCEFB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCA26B3B-EB33-4F0E-9649-7BC76DCCEFB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCA26B3B-EB33-4F0E-9649-7BC76DCCEFB9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,7 +5,7 @@ using System.Configuration;
 
 namespace OpcWebApi.Services
 {
-    public static class OpcServices
+    public static class OpcServicesTest
     {
         public static Dictionary<string, string> GetVal(string itemId, string groupName = "AKE_OPC")
         {
