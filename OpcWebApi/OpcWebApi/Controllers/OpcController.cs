@@ -7,11 +7,11 @@ namespace OpcWebApi.Controllers
     public class OpcController : ApiController
     {
         // GET api/values
-        public HttpResponseMessage GetVal(string id)
+        public HttpResponseMessage GetVal(string itemId)
         {
-            var values = new string[] { "value1", "value2" };
+            var result = Services.OpcServices.GetVal(itemId);
 
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, values);
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
             response.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
 
             return response;
