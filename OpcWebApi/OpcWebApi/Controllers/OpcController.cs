@@ -11,6 +11,32 @@ namespace OpcWebApi.Controllers
 {
     public class OpcController : ApiController
     {
+        private string ServerUrl
+        {
+            get
+            {
+                string serverPort = ConfigurationManager.AppSettings["ServerPort"];
+                if (string.IsNullOrEmpty(serverPort))
+                {
+                    return "http://localhost:18001/MyService";
+                }
+                else
+                {
+
+                    return $"http://localhost:{serverPort}/MyService";
+                }
+            }
+        }
+
+        private IMyService ServiceInstance
+        {
+            get
+            {
+                ChannelFactory<IMyService> factory = new ChannelFactory<IMyService>(new BasicHttpBinding(), new EndpointAddress(ServerUrl));
+                return factory.CreateChannel();
+            }
+        }
+
         // GET api/values
         [Route("api/opc/GetVal")]
         public HttpResponseMessage GetVal(string itemId, string groupName)
@@ -23,56 +49,21 @@ namespace OpcWebApi.Controllers
                 groupName = ConfigurationManager.AppSettings["GroupName"];
             }
 
-            ChannelFactory<IMyService> factory = new ChannelFactory<IMyService>(new BasicHttpBinding(), new EndpointAddress("http://localhost:8001/MyService"));
-            IMyService service = factory.CreateChannel();
-            var result = service.GetVal(itemId, groupName);
-            Console.WriteLine(result);
-
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
-            response.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-
-            return response;
-        }
-
-        [Route("api/opc/getvals")]
-        [HttpPost]
-        public HttpResponseMessage PostVals(string itemIds, string groupName)
-        {
-            if (string.IsNullOrEmpty(groupName))
+            try
             {
-                groupName = ConfigurationManager.AppSettings["GroupName"];
+                IMyService service = this.ServiceInstance;
+                var result = service.GetVal(itemId, groupName);
+
+                return BuildResult(result);
             }
-
-            ChannelFactory<IMyService> factory = new ChannelFactory<IMyService>(new BasicHttpBinding(), new EndpointAddress("http://localhost:8001/MyService"));
-            IMyService service = factory.CreateChannel();
-            var result = service.GetVals(itemIds, groupName);
-            Console.WriteLine(result);
-
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
-            response.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-
-            return response;
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return ErrorResult(ex.Message);
+            }
         }
 
-        //[Route("api/opc/batch")]
-        ////[HttpPost]
-        //public HttpResponseMessage PostBatch(string itemIds, string groupName)
-        //{
-        //    if (string.IsNullOrEmpty(groupName))
-        //    {
-        //        groupName = ConfigurationManager.AppSettings["GroupName"];
-        //    }
 
-        //    ChannelFactory<IMyService> factory = new ChannelFactory<IMyService>(new BasicHttpBinding(), new EndpointAddress("http://localhost:8001/MyService"));
-        //    IMyService service = factory.CreateChannel();
-        //    var result = service.GetVals(itemIds, groupName);
-        //    Console.WriteLine(result);
-
-        //    HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
-        //    response.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-
-        //    return response;
-        //}
 
         [Route("api/opc/batch")]
         [HttpPost]
@@ -83,12 +74,34 @@ namespace OpcWebApi.Controllers
                 request.GroupName = ConfigurationManager.AppSettings["GroupName"];
             }
 
-            ChannelFactory<IMyService> factory = new ChannelFactory<IMyService>(new BasicHttpBinding(), new EndpointAddress("http://localhost:8001/MyService"));
-            IMyService service = factory.CreateChannel();
-            var result = service.GetVals(request.ItemIds, request.GroupName);
-            Console.WriteLine(result);
+            try
+            {
+                IMyService service = this.ServiceInstance;
+                var result = service.GetVals(request.ItemIds, request.GroupName);
+                Console.WriteLine(result);
 
+                return BuildResult(result);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return ErrorResult(ex.Message);
+            }
+
+
+        }
+
+        private HttpResponseMessage BuildResult<T>(T result)
+        {
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
+            response.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+
+            return response;
+        }
+
+        private HttpResponseMessage ErrorResult(string errMsg)
+        {
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.BadRequest, errMsg);
             response.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
 
             return response;
