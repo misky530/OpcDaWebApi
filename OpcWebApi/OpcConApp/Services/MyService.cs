@@ -10,14 +10,14 @@ namespace OpcConApp.Services
             return "data:" + value;
         }
 
-        public IEnumerable<Dictionary<string, string>> GetVals(string itemIds)
+        public IEnumerable<Dictionary<string, string>> GetVals(string itemIds, string groupName)
         {
-            return OpcServices.GetVals(itemIds, "Group0");
+            return OpcServices.GetVals(itemIds, groupName);
         }
 
-        public Dictionary<string, string> GetVal(string itemId)
+        public Dictionary<string, string> GetVal(string itemId, string groupName)
         {
-            return OpcServices.GetVal(itemId, "Group0");
+            return OpcServices.GetVal(itemId, groupName);
         }
     }
 }

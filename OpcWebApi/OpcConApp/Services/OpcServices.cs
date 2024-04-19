@@ -7,7 +7,7 @@ namespace OpcConApp.Services
 {
     public static class OpcServices
     {
-        public static IEnumerable<Dictionary<string, string>> GetVals(string itemIds, string groupName = "AKE_OPC")
+        public static IEnumerable<Dictionary<string, string>> GetVals(string itemIds, string groupName)
         {
             var opcServer = default(OPCServer);
             var list = new List<Dictionary<string, string>>();
@@ -62,7 +62,7 @@ namespace OpcConApp.Services
         }
 
 
-        public static Dictionary<string, string> GetVal(string itemId, string groupName = "AKE_OPC")
+        public static Dictionary<string, string> GetVal(string itemId, string groupName)
         {
             var opcServer = default(OPCServer);
             try
@@ -107,12 +107,12 @@ namespace OpcConApp.Services
 
         }
 
-        public static OPCServer GetInstance()
+        private static OPCServer GetInstance()
         {
-            string ProgId = ConfigurationManager.AppSettings["Key"];
+            string ProgId = ConfigurationManager.AppSettings["ProgId"];
             string Ip = ConfigurationManager.AppSettings["Ip"];
 
-            if (string.IsNullOrEmpty(ProgId) || string.IsNullOrEmpty(Ip))
+            if (string.IsNullOrEmpty(ProgId) && string.IsNullOrEmpty(Ip))
             {
                 throw new Exception("请检查配置文件中的Key和Ip是否正确");
             }
