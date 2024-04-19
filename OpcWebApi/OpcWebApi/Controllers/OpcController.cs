@@ -26,7 +26,7 @@ namespace OpcWebApi.Controllers
             return response;
         }
 
-        public HttpResponseMessage GetVals(string ids)
+        public HttpResponseMessage GetVals(string itemIds)
         {
             var values = new string[] { "value1", "value2" };
 

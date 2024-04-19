@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpcWebApi", "OpcWebApi\OpcW
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpcConApp", "OpcConApp\OpcConApp.csproj", "{BCA26B3B-EB33-4F0E-9649-7BC76DCCEFB9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpcCoreApi", "OpcCoreApi\OpcCoreApi.csproj", "{90633D0A-CD3F-4F45-AE81-E6F8CB423AD4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{BCA26B3B-EB33-4F0E-9649-7BC76DCCEFB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCA26B3B-EB33-4F0E-9649-7BC76DCCEFB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCA26B3B-EB33-4F0E-9649-7BC76DCCEFB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90633D0A-CD3F-4F45-AE81-E6F8CB423AD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90633D0A-CD3F-4F45-AE81-E6F8CB423AD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90633D0A-CD3F-4F45-AE81-E6F8CB423AD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90633D0A-CD3F-4F45-AE81-E6F8CB423AD4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace OpcConApp.Services
 {
@@ -7,12 +7,17 @@ namespace OpcConApp.Services
         public string GetData(int value)
         {
 
-            OpcServices.GetInstance();
-            var result = OpcServices.GetVal(".TestStr", "Group0");
+            return "data:" + value;
+        }
 
-            OpcServices.ReleaseInstance();
+        public IEnumerable<Dictionary<string, string>> GetVals(string itemIds)
+        {
+            return OpcServices.GetVals(itemIds, "Group0");
+        }
 
-            return result.Values.First();
+        public Dictionary<string, string> GetVal(string itemId)
+        {
+            return OpcServices.GetVal(itemId, "Group0");
         }
     }
 }
